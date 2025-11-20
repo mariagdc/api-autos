@@ -52,9 +52,9 @@ Para desactivar el entorno virtual:
 deactivate
 
 
-
+## Api en funcionamiento ##
 ## ![Funcionando](image.png)
-
+```
  Autos (/autos)
 Método	Endpoint	Descripción
 POST	/autos	Crear nuevo auto
@@ -64,3 +64,4 @@ PUT	/autos/{id}	Actualizar auto
 DELETE	/autos/{id}	Eliminar auto
 GET	/autos/chasis/{chasis}	Buscar por número de chasis
 GET	/autos/{id}/with-ventas	Auto con historial de ventas
+```
