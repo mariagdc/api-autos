@@ -14,6 +14,10 @@ API REST para gestionar una concesionaria de autos construida con FastAPI, SQLMo
 ## Instalación
 
 1. Clonar el repositorio
+2. Configurar base de datos
+# PostgreSQL (recomendado)
+DATABASE_URL=postgresql://usuario:password@localhost/concesionaria
+
 3. Instalar dependencias:
 ```bash
 pip install -r requirements.txt
@@ -49,4 +53,14 @@ deactivate
 
 
 
-![Funcionando](image.png)
+## ![Funcionando](image.png)
+
+ Autos (/autos)
+Método	Endpoint	Descripción
+POST	/autos	Crear nuevo auto
+GET	/autos	Listar autos (con filtros)
+GET	/autos/{id}	Obtener auto por ID
+PUT	/autos/{id}	Actualizar auto
+DELETE	/autos/{id}	Eliminar auto
+GET	/autos/chasis/{chasis}	Buscar por número de chasis
+GET	/autos/{id}/with-ventas	Auto con historial de ventas
