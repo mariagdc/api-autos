@@ -9,7 +9,7 @@ API REST para gestionar una concesionaria de autos construida con FastAPI, SQLMo
 - ✅ Filtros avanzados para búsqueda
 - ✅ Estadísticas del inventario
 - ✅ Validación de datos con Pydantic
-- ✅ Documentación automática con Swagger UI
+
 
 ## Instalación
 
