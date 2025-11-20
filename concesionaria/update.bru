@@ -1,0 +1,20 @@
+meta {
+  name: update
+  type: http
+  seq: 12
+}
+
+put {
+  url: http://localhost:8000/autos/4
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "precio": 20000,
+    "kilometraje": 22000,
+    "color": "Negro",
+    "descripcion": "Auto actualizado, revisado completamente"
+  }
+}

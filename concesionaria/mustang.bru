@@ -1,0 +1,24 @@
+meta {
+  name: mustang
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:8000/autos/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marca": "Ford",
+    "modelo": "Mustang",
+    "año": 2023,
+    "precio": 55000,
+    "kilometraje": 5000,
+    "color": "Rojo",
+    "tipo_combustible": "gasolina",
+    "descripcion": "Mustang GT, motor V8"
+  }
+}

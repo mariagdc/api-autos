@@ -3,6 +3,11 @@ from typing import Optional, List
 from enum import Enum
 from datetime import datetime
 from pydantic import BaseModel
+from datetime import datetime, timedelta
+
+def hora_argentina():
+    """Hora actual en Argentina (UTC-3)"""
+    return datetime.utcnow() - timedelta(hours=3)
 
 class EstadoAuto(str, Enum):
     DISPONIBLE = "disponible"
@@ -26,7 +31,7 @@ class Auto(SQLModel, table=True):
     color: str
     tipo_combustible: TipoCombustible
     estado: EstadoAuto = Field(default=EstadoAuto.DISPONIBLE)
-    fecha_ingreso: datetime = Field(default_factory=datetime.utcnow)
+    fecha_ingreso: datetime = Field(default_factory=hora_argentina)
     descripcion: Optional[str] = Field(default=None)
     imagen_url: Optional[str] = Field(default=None)
 
@@ -68,12 +73,11 @@ class AutoResponse(BaseModel):
     imagen_url: Optional[str]
 
 class VentaCreate(BaseModel):
-    auto_id: int
     cliente_nombre: str
     cliente_email: str
     cliente_telefono: str
     precio_venta: float
-    fecha_venta: datetime = Field(default_factory=datetime.utcnow)
+    fecha_venta: datetime = Field(default_factory=hora_argentina)
 
 class VentaResponse(BaseModel):
     id: int

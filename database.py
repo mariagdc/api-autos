@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuración de la base de datos
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg2://user:password@localhost/concesionaria")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:admin@admin:5432/concesionaria")
 
 # Motor síncrono para SQLModel
 engine = create_engine(DATABASE_URL, echo=True)

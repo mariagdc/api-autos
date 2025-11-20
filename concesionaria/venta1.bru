@@ -1,0 +1,20 @@
+meta {
+  name: venta1
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:8000/autos/2/vender
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "cliente_nombre": "María González",
+    "cliente_email": "maria.gonzalez@email.com",
+    "cliente_telefono": "+1234567890",
+    "precio_venta": 24500
+  }
+}

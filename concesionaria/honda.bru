@@ -1,0 +1,24 @@
+meta {
+  name: honda
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8000/autos/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marca": "Honda",
+    "modelo": "Civic",
+    "año": 2021,
+    "precio": 22000,
+    "kilometraje": 20000,
+    "color": "Gris",
+    "tipo_combustible": "gasolina",
+    "descripcion": "Full equipo, aire acondicionado"
+  }
+}

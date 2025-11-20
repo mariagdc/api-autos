@@ -1,0 +1,24 @@
+meta {
+  name: camioneta diesel
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8000/autos/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marca": "Volskwagen",
+    "modelo": "Amarok",
+    "año": 2021,
+    "precio": 35000,
+    "kilometraje": 30000,
+    "color": "Azul",
+    "tipo_combustible": "diesel",
+    "descripcion": "Camioneta 4x4 diesel, full equipo"
+  }
+}

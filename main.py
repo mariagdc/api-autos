@@ -87,8 +87,7 @@ def vender_auto(
     session: Session = Depends(get_session)
 ):
     """Marcar un auto como vendido"""
-    venta.auto_id = auto_id
-    auto = crud.vender_auto(session, venta)
+    auto = crud.vender_auto(session, auto_id, venta)
     if not auto:
         raise HTTPException(
             status_code=400, 
@@ -110,4 +109,4 @@ def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="localhost", port=8000)

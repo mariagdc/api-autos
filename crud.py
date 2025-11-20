@@ -62,8 +62,9 @@ def delete_auto(session: Session, auto_id: int) -> bool:
     return False
 
 # Funciones para ventas
-def vender_auto(session: Session, venta: VentaCreate) -> Optional[Auto]:
-    auto = session.get(Auto, venta.auto_id)
+# Funciones para ventas
+def vender_auto(session: Session, auto_id: int, venta: VentaCreate) -> Optional[Auto]:
+    auto = session.get(Auto, auto_id)
     if auto and auto.estado == EstadoAuto.DISPONIBLE:
         auto.estado = EstadoAuto.VENDIDO
         session.add(auto)
@@ -71,38 +72,58 @@ def vender_auto(session: Session, venta: VentaCreate) -> Optional[Auto]:
         session.refresh(auto)
         return auto
     return None
-
 # Funciones para estadísticas
 def get_estadisticas(session: Session) -> dict:
-    # Total de autos
-    total_autos = session.exec(select(func.count(Auto.id))).first()
-    
-    # Autos por estado
-    autos_disponibles = session.exec(
-        select(func.count(Auto.id)).where(Auto.estado == EstadoAuto.DISPONIBLE)
-    ).first()
-    
-    autos_vendidos = session.exec(
-        select(func.count(Auto.id)).where(Auto.estado == EstadoAuto.VENDIDO)
-    ).first()
-    
-    # Valor del inventario (solo autos disponibles)
-    valor_inventario = session.exec(
-        select(func.sum(Auto.precio)).where(Auto.estado == EstadoAuto.DISPONIBLE)
-    ).first() or 0
-    
-    # Marca más popular (más autos en inventario)
-    marca_popular = session.exec(
-        select(Auto.marca, func.count(Auto.id))
-        .group_by(Auto.marca)
-        .order_by(func.count(Auto.id).desc())
-        .limit(1)
-    ).first()
-    
-    return {
-        "total_autos": total_autos,
-        "autos_disponibles": autos_disponibles,
-        "autos_vendidos": autos_vendidos,
-        "valor_inventario": valor_inventario,
-        "marca_mas_popular": marca_popular[0] if marca_popular else "N/A"
-    }
+    try:
+        # Total de autos
+        total_autos = session.exec(select(func.count(Auto.id))).first() or 0
+        
+        # Autos por estado
+        autos_disponibles = session.exec(
+            select(func.count(Auto.id)).where(Auto.estado == EstadoAuto.DISPONIBLE)
+        ).first() or 0
+        
+        autos_vendidos = session.exec(
+            select(func.count(Auto.id)).where(Auto.estado == EstadoAuto.VENDIDO)
+        ).first() or 0
+        
+        # Valor del inventario (solo autos disponibles)
+        valor_inventario_result = session.exec(
+            select(func.sum(Auto.precio)).where(Auto.estado == EstadoAuto.DISPONIBLE)
+        ).first()
+        valor_inventario = float(valor_inventario_result) if valor_inventario_result else 0.0
+        
+        # Ingresos totales (precio de autos vendidos)
+        ingresos_totales_result = session.exec(
+            select(func.sum(Auto.precio)).where(Auto.estado == EstadoAuto.VENDIDO)
+        ).first()
+        ingresos_totales = float(ingresos_totales_result) if ingresos_totales_result else 0.0
+        
+        # Marca más popular
+        marca_query = session.exec(
+            select(Auto.marca, func.count(Auto.id))
+            .group_by(Auto.marca)
+            .order_by(func.count(Auto.id).desc())
+            .limit(1)
+        ).first()
+        
+        marca_mas_popular = marca_query[0] if marca_query else "N/A"
+        
+        return {
+            "total_autos": total_autos,
+            "autos_disponibles": autos_disponibles,
+            "autos_vendidos": autos_vendidos,
+            "valor_inventario": valor_inventario,
+            "ingresos_totales": ingresos_totales,
+            "marca_mas_popular": marca_mas_popular
+        }
+    except Exception as e:
+        # En caso de error, devolver valores por defecto
+        return {
+            "total_autos": 0,
+            "autos_disponibles": 0,
+            "autos_vendidos": 0,
+            "valor_inventario": 0.0,
+            "ingresos_totales": 0.0,
+            "marca_mas_popular": "N/A"
+        }

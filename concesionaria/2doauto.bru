@@ -1,0 +1,25 @@
+meta {
+  name: 2doauto
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8000/autos/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marca": "Tesla",
+    "modelo": "Model 3",
+    "año": 2023,
+    "precio": 45000,
+    "kilometraje": 5000,
+    "color": "Rojo",
+    "tipo_combustible": "electrico",
+    "descripcion": "Tesla Model 3 Performance",
+    "imagen_url": "https://www.sectorelectricidad.com/wp-content/uploads/2018/03/el-tesla-model-s-bate-el-record-de-autonomia-de-un-coche-electrico.jpg"
+  }
+}

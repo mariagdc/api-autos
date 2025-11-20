@@ -1,0 +1,16 @@
+meta {
+  name: get con filtrados
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:8000/autos/?marca=Ford&precio_max=40000
+  body: none
+  auth: none
+}
+
+params:query {
+  marca: Ford
+  precio_max: 40000
+}

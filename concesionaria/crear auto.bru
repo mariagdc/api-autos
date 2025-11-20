@@ -1,0 +1,24 @@
+meta {
+  name: crear auto
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/autos/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marca": "Toyota",
+    "modelo": "Corolla",
+    "año": 2022,
+    "precio": 25000,
+    "kilometraje": 15000,
+    "color": "Blanco",
+    "tipo_combustible": "gasolina",
+    "descripcion": "Auto en excelente estado, único dueño"
+  }
+}
