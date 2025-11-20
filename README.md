@@ -65,3 +65,32 @@ DELETE	/autos/{id}	Eliminar auto
 GET	/autos/chasis/{chasis}	Buscar por número de chasis
 GET	/autos/{id}/with-ventas	Auto con historial de ventas
 ```
+Health check
+curl http://localhost:8000/health
+
+# Verificar estructura de datos
+curl http://localhost:8000/autos/
+
+👥 Responsables del Proyecto
+
+Estudiante: [Maria Florencia Godoy Del Castillo]
+Materia: Programación IV
+Carrera: Tecnicatura Universitaria en Programación
+Universidad: Universidad Tecnológica Nacional
+Año: 2025
+📄 Licencia
+
+Este proyecto fue desarrollado con fines educativos para la Universidad Tecnológica Nacional.
+🚀 Próximos Pasos
+
+Para comenzar a usar la API:
+
+    Configurar la base de datos en database.py
+
+    Ejecutar la aplicación con uvicorn main:app --reload
+
+    Explorar la documentación en http://localhost:8000/docs
+
+    Probar los endpoints con Postman o curl
+
+¡La API está lista para producción! 🎉
